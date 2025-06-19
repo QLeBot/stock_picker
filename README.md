@@ -189,22 +189,6 @@ The application is designed for value investing with specific criteria:
 - [ ] Price history analysis
 - [ ] Automated trading signals
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## ⚠️ Disclaimer
 
 This tool is for educational and research purposes only. It does not constitute financial advice. Always conduct your own research and consult with financial professionals before making investment decisions.
-
-## 📞 Support
-
-For questions or issues, please open an issue on the GitHub repository or contact the development team.
