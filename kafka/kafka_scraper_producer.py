@@ -64,7 +64,7 @@ class StockScrapingProducer:
         self.producer.close()
 
 def main():
-    # Regions to scrape (you can modify this list)
+    # Regions to scrape
     regions = [
         {"code": "us", "name": "United States"},
         {"code": "fr", "name": "France"},
