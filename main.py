@@ -267,16 +267,16 @@ def process_stocks(regions):
                     continue
 
     # save the main dataframe to a csv file
-    df.to_csv('stock_analyzer/data/financials.csv', index=False)
+    df.to_csv('data/financials.csv', index=False)
 
 def main():
     custom_regions = [
         {"code": "gb", "name": "United Kingdom"},
         {"code": "fr", "name": "France"}
     ]
-    #results = scrape_stocks(market_cap_min="300M", market_cap_max="2B", regions=regions, headless=True)
-    #print("Basic scraping completed")
-    process_stocks(regions)
+    results = scrape_stocks(market_cap_min="2B", market_cap_max="10B", regions=regions, headless=True)
+    print("Basic scraping completed")
+    #process_stocks(regions)
     
     # Get financial data for testing
     #ticker = yf.Ticker("6666.TW")

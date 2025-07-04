@@ -269,7 +269,7 @@ def change_market_cap_filter(driver, market_cap_min, market_cap_max):
     time.sleep(2)
 
     # Apply Button
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="primary-btn fin-size-small rounded yf-1cfb8vd"]'))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="primary-btn fin-size-small rounded yf-1epmntv"]'))).click()
     time.sleep(5)
 
 def change_region_filter(driver, region, previous_region):
@@ -311,7 +311,7 @@ def scrape_all_tickers(driver, country_code):
             # get all tickers
             time.sleep(10)
             # get all tickers
-            all_tickers = driver.find_elements(By.XPATH, '//a[@class="ticker x-small hover logo stacked yf-5ogvqh"]')
+            all_tickers = driver.find_elements(By.XPATH, '//a[@class="ticker x-small hover logo stacked yf-hwu3c7"]')
             page_tickers = {}
             for ticker in all_tickers:
                 href = ticker.get_attribute('href')
@@ -414,7 +414,7 @@ def scrape_stocks(market_cap_min="300M", market_cap_max="2B", regions=None, head
             })
             
             # Save to CSV
-            df.to_csv(f'stock_analyzer/data/raw/small_caps_tickers_{region["code"]}.csv', index=False)
+            df.to_csv(f'data/raw/tickers_{market_cap_min}_{market_cap_max}_{region["code"]}.csv', index=False)
         
         return results
 
