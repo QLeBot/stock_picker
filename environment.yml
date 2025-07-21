@@ -26,3 +26,4 @@ dependencies:
       - apache-airflow
       - kafka-python
       - psycopg2-binary
+      - fastapi[standard]

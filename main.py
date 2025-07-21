@@ -206,7 +206,16 @@ def store_ratios_in_db(symbol, name, country, ratios_df):
 
 def data_from_db(region):
     # get the data from the database
-    cursor.execute(f"SELECT symbol, name, country_code FROM stock WHERE country_code = '{region['code']}'")
+    cursor.execute(f"""
+                   SELECT 
+                        symbol, 
+                        name, 
+                        country_code 
+                   FROM stock 
+                   WHERE symbol NOT IN (SELECT symbol FROM financial_ratios)
+                   AND country_code = '{region['code']}'
+                   LIMIT 10
+                   """)
     stock_list = cursor.fetchall()
     symbol_list = [stock[0] for stock in stock_list]
     name_list = [stock[1] for stock in stock_list]
@@ -248,6 +257,10 @@ def process_stocks(regions):
                     ticker = yf.Ticker(symbol)
                     ratios_df = calculate_ratios(ticker)
                     
+                    if ratios_df is None or ratios_df.empty or 'Date' not in ratios_df.columns:
+                        print(f"Skipping {symbol}: No valid ratios data")
+                        continue
+
                     # Store ratios in database
                     store_ratios_in_db(symbol, name_list[symbol_list.index(symbol)], country, ratios_df)
                     
@@ -274,9 +287,9 @@ def main():
         {"code": "gb", "name": "United Kingdom"},
         {"code": "fr", "name": "France"}
     ]
-    results = scrape_stocks(market_cap_min="2B", market_cap_max="10B", regions=regions, headless=True)
-    print("Basic scraping completed")
-    #process_stocks(regions)
+    #results = scrape_stocks(market_cap_min="500B", market_cap_max="4T", regions=regions, headless=True)
+    #print("Basic scraping completed")
+    process_stocks(regions)
     
     # Get financial data for testing
     #ticker = yf.Ticker("6666.TW")
